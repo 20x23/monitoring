@@ -1,0 +1,21 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+use Monitoring\Command\MonitorWebsitesCommand;
+use Symfony\Component\Console\Application;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// DI-Container laden
+$container = require __DIR__ . '/../src/container.php';
+
+// Symfony Console Application erstellen
+$application = new Application('Website Monitor', '1.0.0');
+
+// Command hinzufügen
+$application->add($container->get(MonitorWebsitesCommand::class));
+
+// Anwendung starten
+$application->run();
